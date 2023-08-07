@@ -1,0 +1,11 @@
+# Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  chat_member_id: 1
+  chat_message_id: 1
+  read_at: 2023-08-07 09:24:18
+
+two:
+  chat_member_id: 1
+  chat_message_id: 1
+  read_at: 2023-08-07 09:24:18

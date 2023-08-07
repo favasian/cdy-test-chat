@@ -1,0 +1,15 @@
+# Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  chat_id: 1
+  chatter: one
+  chatter_type: Chatter
+  archived: false
+  unread_count: 1
+
+two:
+  chat_id: 1
+  chatter: two
+  chatter_type: Chatter
+  archived: false
+  unread_count: 1
