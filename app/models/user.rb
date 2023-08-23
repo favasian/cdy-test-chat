@@ -5,5 +5,6 @@ class User < ApplicationRecord
   has_many :managers
   has_many :owners, through: :managers
   
-  delegate :provider?, :owner?, :ambassador?, to: :account
+  delegate :provider?, :owner?, :vendor?, :default_chat_member_group, to: :account
+
 end

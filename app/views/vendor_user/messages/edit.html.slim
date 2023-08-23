@@ -1,0 +1,8 @@
+h1 Edit Message
+
+= form_for @message, url: vendor_user_chat_message_path(@current_vendor, @current_user, @message.chat), method: :put  do |f|
+      .row.p-2
+        .col-sm-9
+          = f.text_field :content, class: "form-control"
+        .col-sm-3
+          = f.submit "Update Message", class: "btn btn-primary"

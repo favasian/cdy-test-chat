@@ -1,0 +1,17 @@
+h1 Job Posts
+
+table.table
+  thead
+    tr
+      th Name
+      th
+  tbody
+    - @job_posts.each do |job_post|
+      tr class=('border' if job_post == @highlight_job_post)
+        td = job_post.name
+        td 
+          - if job_post.applied?(@current_provider)
+            b Already Applied
+          - else
+            = link_to "Apply to Job", apply_provider_job_post_path(@current_provider, job_post)
+        

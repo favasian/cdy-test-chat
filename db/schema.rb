@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2023_08_07_171506) do
+ActiveRecord::Schema.define(version: 2023_08_23_134910) do
 
   create_table "accounts", force: :cascade do |t|
     t.integer "user_id"
@@ -27,7 +27,7 @@ ActiveRecord::Schema.define(version: 2023_08_07_171506) do
     t.integer "unread_count", default: 0
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
-    t.integer "parent_member_id"
+    t.string "group"
     t.index ["chatter_type", "chatter_id"], name: "index_chat_members_on_chatter"
   end
 
@@ -39,6 +39,8 @@ ActiveRecord::Schema.define(version: 2023_08_07_171506) do
     t.integer "sender_chat_member_id"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+    t.integer "sender_proxy_id"
+    t.string "sender_proxy_type"
   end
 
   create_table "chat_recipient_receipts", force: :cascade do |t|
@@ -55,6 +57,9 @@ ActiveRecord::Schema.define(version: 2023_08_07_171506) do
     t.datetime "last_message_sent_at"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+    t.integer "chat_member_count", default: 0
+    t.integer "about_id"
+    t.string "about_type"
   end
 
   create_table "job_post_applications", force: :cascade do |t|
@@ -69,6 +74,7 @@ ActiveRecord::Schema.define(version: 2023_08_07_171506) do
     t.string "name"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+    t.integer "created_by_user_id"
   end
 
   create_table "managers", force: :cascade do |t|
@@ -111,6 +117,7 @@ ActiveRecord::Schema.define(version: 2023_08_07_171506) do
     t.string "name"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+    t.boolean "recruiter", default: false
   end
 
   create_table "vendors", force: :cascade do |t|

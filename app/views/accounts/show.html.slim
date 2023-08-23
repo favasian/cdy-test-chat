@@ -1,0 +1,42 @@
+h1 = @account.name
+
+
+- if @account.owner?
+  h3 Owners
+  table.table
+    thead
+      tr
+        th Name
+        th Users
+    tbody
+      - @account.owners.each do |owner|
+        tr
+          td = owner.name
+          td
+            - owner.users.each do |user|
+              div = link_to "Impersonate #{user.name}", owner_user_job_posts_path(owner, user)
+
+- elsif @account.provider?
+  h3 Provider
+  table.table
+    thead
+      tr
+        th Name
+        th Users
+    tbody
+      tr
+        td = @account.provider.name
+        td = link_to "Impersonate #{@account.user.name}", provider_job_posts_path(@account.provider)
+- elsif @account.vendor?
+  h3 Vendor
+  table.table
+    thead
+      tr
+        th Name
+        th Users
+    tbody
+      tr
+        td = @account.vendor.name
+        td 
+          - @account.users.each do |user|
+            = link_to "Impersonate #{user.name}", vendor_user_non_clinical_job_posts_path(@account.vendor, user)

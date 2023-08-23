@@ -1,0 +1,8 @@
+h1 New Job Post
+
+= form_for @job_post, url: owner_user_job_posts_path(@current_owner, @current_user), method: :post  do |f|
+      .row.p-2
+        .col-sm-9
+          = f.text_field :name, class: "form-control"
+        .col-sm-3
+          = f.submit "Create Job Post", class: "btn btn-primary"
