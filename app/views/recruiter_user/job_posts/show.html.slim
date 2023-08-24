@@ -1,5 +1,5 @@
 .row
-  .col-sm-6
+  .col-sm-4
     h3 Job Post
     = "Office: #{@job_post.owner.name}"
     br
@@ -12,7 +12,7 @@
         div = application.provider.name
 
 
-  .col-sm-6
+  .col-sm-8
     h4 Chats
     - @job_post.chats.each do |chat|
       - if @job_post.created_by_user&.recruiter?
@@ -23,8 +23,11 @@
         = render '/shared/chats/messages', chatbox: chatbox
         = form_for Chat::Message.new, url: user_job_post_chat_messages_path(@current_user, @job_post, chat), method: :post  do |f|
           .row.p-2
-            .col-sm-9
+            .col-sm-6
               = f.text_field :content, class: "form-control"
             .col-sm-3
               = f.submit "Send Message", class: "btn btn-primary"
+            .col-sm-3
+              - unless chatbox.is_chatter?(@job_post.owner)
+                = link_to "Add Office to Chat", add_office_user_job_post_chat_messages_path(@current_user, @job_post, chat), class: "btn btn-success"
       br

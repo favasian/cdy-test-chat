@@ -27,7 +27,11 @@ Rails.application.routes.draw do
   resources :users, module: :recruiter_user do 
     resources :job_posts do
       resources :chats do
-        resources :messages
+        resources :messages do 
+          collection do 
+            get :add_office
+          end
+        end
       end
     end
   end

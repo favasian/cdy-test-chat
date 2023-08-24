@@ -26,6 +26,14 @@ class RecruiterUser::MessagesController < RecruiterUser::BaseController
     redirect_to user_job_post_path(@current_user, @job_post)
   end
 
+  def add_office
+    @job_post = @current_account.job_posts.where(id: params[:job_post_id]).first
+    chat = Chat.where(id: params[:chat_id]).first
+    chatbox = Chatbox.new(chat, @current_account)
+    chatbox.add_chatter_as_member(@job_post.owner)
+    redirect_to user_job_post_path(@current_user, @job_post)
+  end
+
   def message_params
     params.require(:chat_message).permit(:content)
   end

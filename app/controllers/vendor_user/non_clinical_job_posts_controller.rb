@@ -5,9 +5,7 @@ class VendorUser::NonClinicalJobPostsController < VendorUser::BaseController
   end
 
   def show
-    @highlight_job_post = @current_vendor.non_clinical_job_posts.where(id: params[:id]).first
-    @job_posts = @current_vendor.non_clinical_job_posts
-    render :index
+    @job_post = @current_vendor.non_clinical_job_posts.where(id: params[:id]).first
   end
 
   def new

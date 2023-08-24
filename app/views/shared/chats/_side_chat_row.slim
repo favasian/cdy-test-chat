@@ -6,6 +6,8 @@ h4
     = link_to chatbox.title, provider_chats_path(@current_provider, chat_id: chat.id)
   - elsif @current_vendor.present?
     = link_to chatbox.title, vendor_user_chats_path(chat_id: chat.id)
+- if chatbox.about.present?
+  h6 = "About #{chat.about.about_object.class.to_s.titleize}: #{chat.about.about_name}"
 div = chatbox.last_message_content
 div = chatbox.last_message_sent_at
 - if chatbox.unread_count > 0

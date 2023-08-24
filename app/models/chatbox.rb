@@ -8,6 +8,10 @@ class Chatbox < Mailbox
     @member = chat.member_for_chatter(chatter)
   end
 
+  def about
+    @chat.about
+  end
+
   def send_proxy_message(sender_proxy, content, about=nil)
     @chat.send_message(@member, sender_proxy, content, about)
   end
@@ -48,4 +52,11 @@ class Chatbox < Mailbox
     end
   end
 
+  def add_chatter_as_member(chatter)
+    find_or_create_member!(@chat, chatter)
+  end
+
+  def is_chatter?(chatter)
+    @chat.member_for_chatter(chatter).present?
+  end
 end

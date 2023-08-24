@@ -1,0 +1,24 @@
+.row
+  .col-sm-4
+    h3 Non Clinical Job Post
+    = "Job Name: #{@job_post.name}"
+    br
+    br
+      | Applicants:
+      - @job_post.non_clinical_job_applications.each do |application|
+        div = application.provider.name
+
+
+  .col-sm-8
+    h4 Chats
+    - @job_post.chats.each do |chat|
+      - chatbox = Chatbox.new(chat, @current_vendor)
+      .border
+        = render '/shared/chats/messages', chatbox: chatbox
+        = form_for Chat::Message.new, url: vendor_user_chat_messages_path(@current_vendor, @current_user, chat), method: :post  do |f|
+          .row.p-2
+            .col-sm-9
+              = f.text_field :content, class: "form-control"
+            .col-sm-3
+              = f.submit "Send Message", class: "btn btn-primary"
+      br

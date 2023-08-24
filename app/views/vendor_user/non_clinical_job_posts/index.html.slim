@@ -8,7 +8,7 @@ table.table
   tbody
     - @job_posts.each do |job_post|
       tr class=('border' if job_post == @highlight_job_post)
-        td = job_post.name
+        td = link_to job_post.name, vendor_user_non_clinical_job_post_path(@current_vendor, @current_user, job_post)
         td 
           - job_post.non_clinical_job_applications.each do |application|
             div = application.provider.name
