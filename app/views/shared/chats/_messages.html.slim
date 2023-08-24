@@ -1,0 +1,12 @@
+h4 = chatbox.title
+hr
+- chatbox.messages.each do |message|
+  div style=('text-align:right' if chatbox.sent_by_group?(message))
+    = render 'message_about', message: message
+    div = message.content
+    div = message.created_at.strftime("%D %I:%M:%S %p")
+    - if message.sender_proxy.present?
+      div = "Sent by #{message.sender_proxy.name}"
+    = render 'message_edit_btn', chatbox: chatbox, message: message
+
+  hr

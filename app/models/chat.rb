@@ -26,7 +26,7 @@ class Chat < ApplicationRecord
   end
 
   def send_message(sender_member, sender_proxy, content, about)
-    self.messages.create(sender_member: sender_member, sender_proxy: sender_proxy, content: content, about: about)
+    self.messages.create!(sender_member: sender_member, sender_proxy: sender_proxy, content: content, about: about)
   end
 
 

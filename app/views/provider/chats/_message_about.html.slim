@@ -1,0 +1,4 @@
+- if message.about.present?
+  div 
+    | Message is about 
+    = link_to "#{message.about.about_object.class.to_s.titleize}: #{message.about.about_name}", url_for([@current_provider, message.about.about_object])

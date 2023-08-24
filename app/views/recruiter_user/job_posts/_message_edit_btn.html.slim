@@ -1,0 +1,2 @@
+- if chatbox.editable?(message)
+  = link_to "Edit", edit_user_job_post_chat_message_path( @current_user, @job_post, chatbox.chat, message)

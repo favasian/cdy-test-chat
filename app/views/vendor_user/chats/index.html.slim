@@ -3,31 +3,10 @@
     h3 Chats
     hr
     - @chats.each do |chat|
-      - chatbox = Chatbox.new(chat, @current_vendor)
-      h4 = link_to chatbox.title, vendor_user_chats_path(chat_id: chat.id)
-      div = chat.last_message_content
-      div = chat.last_message_sent_at.strftime("%D %I:%M:%S %p")
-      - if chatbox.unread_count > 0
-        div = "#{chatbox.unread_count} Unread"
-      hr
+      = render '/shared/chats/side_chat_row', chat: chat, chatter: @current_vendor
   .col-sm-9.border
     - if @current_chatbox.present?
-      h4 = @current_chatbox.title
-      hr
-      - @current_chatbox.messages.each do |message|
-        div style=('text-align:right' if @current_chatbox.sent_by_group?(message))
-          - if message.about.present?
-            div 
-              | Message is about 
-              = link_to "#{message.about.about_object.class.to_s.titleize}: #{message.about.about_name}", url_for([@current_vendor, @current_user, message.about.about_object])
-          div = message.content
-          div = message.created_at.strftime("%D %I:%M:%S %p")
-          - if message.sender_proxy.present?
-            div = "Sent by #{message.sender_proxy.name}"
-          - if @current_chatbox.editable?(message)
-            = link_to "Edit", edit_vendor_user_chat_message_path(@current_vendor, @current_user, @current_chat, message)
-
-        hr
+      = render '/shared/chats/messages', chatbox: @current_chatbox
       = form_for Chat::Message.new, url: vendor_user_chat_messages_path(@current_vendor, @current_user, @current_chat), method: :post  do |f|
         .row.p-2
           .col-sm-9

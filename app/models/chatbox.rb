@@ -32,6 +32,14 @@ class Chatbox < Mailbox
     sent?(message) && message.created_at >= 5.minutes.ago
   end
 
+  def last_message_content
+    @chat.last_message_content
+  end
+
+  def last_message_sent_at
+    @chat.last_message_sent_at.strftime("%D %I:%M:%S %p")
+  end
+
   def mark_all_messages_as_read!
     #current implementation is to mark as read for all people in the same group
     @chat.members.where(group: @member.group).each do |member|

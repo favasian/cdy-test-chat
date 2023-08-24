@@ -16,10 +16,10 @@ class JobPost < ApplicationRecord
 
   def apply!(provider)
     jpa = self.job_post_applications.create(provider: provider)
-    if self.created_by_user&.recruiter?
+    if self.created_by_recruiter?
       Mailbox.new(provider, jpa).send_message_to(self.owner.account, "I want to apply!", jpa)
     else
-      Mailbox.new(provider, jpa).send_message_to(self.owner, "I want to apply!", jpa)
+      Mailbox.new(provider).send_message_to(self.owner, "I want to apply!", jpa)
     end
   end
 end

@@ -20,24 +20,11 @@
       - else
         - chatbox = Chatbox.new(chat, @job_post.owner)
       .border
-        h4 = chatbox.title
-        hr
-        - chat.messages.includes(:sender_member).order(created_at: :asc).each do |message|
-          div style=('text-align:right' if chatbox.sent_by_group?(message))
-            - if message.about.present?
-              div 
-                | Message is about 
-                = link_to "#{message.about.about_object.class.to_s.titleize}: #{message.about.about_name}", url_for([@job_post.owner, @current_user, message.about.about_object])
-            div = message.content
-            div = message.created_at.strftime("%D %I:%M:%S %p")
-            - if message.sender_proxy.present?
-              div = "Sent by #{message.sender_proxy.name}"
-            - if chatbox.editable?(message)
-              = link_to "Edit", edit_user_job_post_chat_message_path( @current_user, @job_post, chat, message)
-          hr
+        = render '/shared/chats/messages', chatbox: chatbox
         = form_for Chat::Message.new, url: user_job_post_chat_messages_path(@current_user, @job_post, chat), method: :post  do |f|
           .row.p-2
             .col-sm-9
               = f.text_field :content, class: "form-control"
             .col-sm-3
               = f.submit "Send Message", class: "btn btn-primary"
+      br

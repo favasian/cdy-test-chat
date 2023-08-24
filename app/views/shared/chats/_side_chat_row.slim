@@ -1,0 +1,13 @@
+- chatbox = Chatbox.new(chat, chatter)
+h4 
+  - if @current_owner.present?
+    = link_to chatbox.title, owner_user_chats_path(chat_id: chat.id)
+  - elsif @current_provider.present?
+    = link_to chatbox.title, provider_chats_path(@current_provider, chat_id: chat.id)
+  - elsif @current_vendor.present?
+    = link_to chatbox.title, vendor_user_chats_path(chat_id: chat.id)
+div = chatbox.last_message_content
+div = chatbox.last_message_sent_at
+- if chatbox.unread_count > 0
+  div = "#{chatbox.unread_count} Unread"
+hr

@@ -1,0 +1,2 @@
+- if chatbox.editable?(message)
+  = link_to "Edit", edit_vendor_user_chat_message_path(@current_vendor, @current_user, chatbox.chat, message)
