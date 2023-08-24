@@ -9,7 +9,7 @@ class Owner < ApplicationRecord
   has_many :non_clinical_job_posts
   has_many :non_clinical_job_applications, through: :non_clinical_job_posts
 
-  def default_chat_member_group
+  def default_chat_member_group(chat)
     "office_account_group"
   end
 

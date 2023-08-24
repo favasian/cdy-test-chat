@@ -11,6 +11,11 @@ Rails.application.routes.draw do
 
   resources :owners do 
     resources :users, module: :owner_user do 
+      resources :providers do 
+        member do 
+          get :send_message
+        end
+      end
       resources :job_posts
       resources :chats do 
         resources :messages

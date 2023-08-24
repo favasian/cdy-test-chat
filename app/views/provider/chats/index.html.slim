@@ -11,22 +11,25 @@
         div = "#{chatbox.unread_count} Unread"
       hr
   .col-sm-9.border
-    h4 = @current_chatbox.title
-    hr
-    - @current_chatbox.messages.each do |message|
-      div style=('text-align:right' if @current_chatbox.sent_by_group?(message))
-        - if message.about.present?
-          div 
-            | Message is about 
-            = link_to "#{message.about.about_object.class.to_s.titleize}: #{message.about.about_name}", url_for([@current_provider, message.about.about_object])
-        div = message.content
-        div = message.created_at.strftime("%D %I:%M:%S %p")
+    - if @current_chatbox.present?
+      h4 = @current_chatbox.title
       hr
-    = form_for Chat::Message.new, url: provider_chat_messages_path(@current_provider, @current_chat), method: :post  do |f|
-      .row.p-2
-        .col-sm-9
-          = f.text_field :content, class: "form-control"
-        .col-sm-3
-          = f.submit "Send Message", class: "btn btn-primary"
+      - @current_chatbox.messages.each do |message|
+        div style=('text-align:right' if @current_chatbox.sent_by_group?(message))
+          - if message.about.present?
+            div 
+              | Message is about 
+              = link_to "#{message.about.about_object.class.to_s.titleize}: #{message.about.about_name}", url_for([@current_provider, message.about.about_object])
+          div = message.content
+          div = message.created_at.strftime("%D %I:%M:%S %p")
+          - if message.sender_proxy.present?
+            div = "Sent by #{message.sender_proxy.name}"
+        hr
+      = form_for Chat::Message.new, url: provider_chat_messages_path(@current_provider, @current_chat), method: :post  do |f|
+        .row.p-2
+          .col-sm-9
+            = f.text_field :content, class: "form-control"
+          .col-sm-3
+            = f.submit "Send Message", class: "btn btn-primary"
 
         

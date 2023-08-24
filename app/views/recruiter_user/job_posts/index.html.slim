@@ -4,12 +4,18 @@ table.table
   thead
     tr
       th Office
+      th Created By
       th Name
       th Applicants
   tbody
     - @job_posts.each do |job_post|
       tr class=('border' if job_post == @highlight_job_post)
         td = job_post.owner.name
+        td
+          - if job_post.created_by_user.present?
+            = job_post.created_by_user.name
+          - else
+            | Office
         td = link_to job_post.name, user_job_post_path(@current_user, job_post)
         td 
           - job_post.job_post_applications.each do |application|

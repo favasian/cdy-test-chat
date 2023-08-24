@@ -1,0 +1,13 @@
+h1 Providers
+table.table
+  thead
+    tr
+      th Name
+      th 
+  tbody
+    - @providers.each do |provider|
+      tr
+        td = provider.name
+        td = link_to "Send Hello message", send_message_owner_user_provider_path(@current_owner, @current_user, provider)
+          
+        

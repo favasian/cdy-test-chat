@@ -6,7 +6,7 @@ class Provider < ApplicationRecord
   has_many :non_clinical_job_applications
 
 
-  def default_chat_member_group
+  def default_chat_member_group(chat)
     "provider_group"
   end
 end

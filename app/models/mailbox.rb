@@ -18,7 +18,7 @@ class Mailbox
   end
 
   def sent_by_group?(message)
-    @chatter.default_chat_member_group == message.sender_member.group
+    @chatter.default_chat_member_group(message.chat) == message.sender_member.group
   end
 
   private
@@ -51,7 +51,7 @@ class Mailbox
   end
 
   def find_or_create_member!(chat, chatter)
-    chat.member_for_chatter(chatter) || chat.members.create!(chatter: chatter, group: chatter.default_chat_member_group)
+    chat.member_for_chatter(chatter) || chat.members.create!(chatter: chatter, group: chatter.default_chat_member_group(chat))
   end
 
 end

@@ -7,8 +7,10 @@ class Provider::ChatsController < Provider::BaseController
     else
       @current_chat = @current_provider.chats.first
     end
-    @current_chatbox = Chatbox.new(@current_chat, @current_provider)
-    @current_chatbox.mark_all_messages_as_read!
+    if @current_chat.present?
+      @current_chatbox = Chatbox.new(@current_chat, @current_provider)
+      @current_chatbox.mark_all_messages_as_read!
+    end
   end
 
 end

@@ -7,7 +7,7 @@ module ChatterCommons
     has_many :chats, through: :chat_members
 
 
-    def default_chat_member_group
+    def default_chat_member_group(chat)
       raise "Chatter must override default_chat_member_group method"
     end
 

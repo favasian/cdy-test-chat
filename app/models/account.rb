@@ -8,7 +8,7 @@ class Account < ApplicationRecord
   has_many :job_posts, through: :owners
   has_one :vendor, dependent: :destroy, autosave: true
 
-  def default_chat_member_group
+  def default_chat_member_group(chat)
     if provider?
       "provider_group"
     elsif vendor?

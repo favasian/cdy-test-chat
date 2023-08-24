@@ -7,8 +7,10 @@ class OwnerUser::ChatsController < OwnerUser::BaseController
     else
       @current_chat = @current_owner.chats.first
     end
-    @current_chatbox = Chatbox.new(@current_chat, @current_owner)
-    @current_chatbox.mark_all_messages_as_read!
+    if @current_chat.present?
+      @current_chatbox = Chatbox.new(@current_chat, @current_owner)
+      @current_chatbox.mark_all_messages_as_read!
+    end
   end
 
   def send_message

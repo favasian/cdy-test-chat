@@ -26,6 +26,9 @@
             </li>
             <% end %>
             <li class="nav-item">
+              <a class="nav-link" href="<%= owner_user_providers_path(@current_owner, @current_user) %>">Providers</a>
+            </li>
+            <li class="nav-item">
               <a class="nav-link" href="<%= owner_user_job_posts_path(@current_owner, @current_user) %>">Job Posts</a>
             </li>
             <li class="nav-item">
@@ -39,6 +42,7 @@
       </div>
     </nav>
     <div class='container'>
+      <h1><%= @current_owner.name %></h1>
       <%= yield %>
     </div>
   </body>

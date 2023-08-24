@@ -7,8 +7,10 @@ class VendorUser::ChatsController < VendorUser::BaseController
     else
       @current_chat = @current_vendor.chats.first
     end
-    @current_chatbox = Chatbox.new(@current_chat, @current_vendor)
-    @current_chatbox.mark_all_messages_as_read!
+    if @current_chat.present?
+      @current_chatbox = Chatbox.new(@current_chat, @current_vendor)
+      @current_chatbox.mark_all_messages_as_read!
+    end
   end
 
   def send_message
