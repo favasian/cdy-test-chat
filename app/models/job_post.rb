@@ -2,7 +2,7 @@ class JobPost < ApplicationRecord
 
   belongs_to :owner
   belongs_to :created_by_user, class_name: 'User', optional: true
-  has_many :job_post_applications
+  has_many :job_post_applications, dependent: :destroy
   has_many :chat_messages, through: :job_post_applications
   has_many :chats, through: :chat_messages
 

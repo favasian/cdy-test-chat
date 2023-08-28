@@ -1,7 +1,7 @@
 class NonClinicalJobPost < ApplicationRecord
 
   belongs_to :vendor
-  has_many :non_clinical_job_applications
+  has_many :non_clinical_job_applications, dependent: :destroy
   has_many :chat_messages, through: :non_clinical_job_applications
   has_many :chats, through: :chat_messages
 

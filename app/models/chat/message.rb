@@ -6,7 +6,7 @@ class Chat::Message < ApplicationRecord
   belongs_to :sender_proxy, polymorphic: true, optional: true
 
   has_many :members, through: :chat
-  has_many :recipient_receipts, class_name: '::Chat::RecipientReceipt', foreign_key: :chat_message_id
+  has_many :recipient_receipts, class_name: '::Chat::RecipientReceipt', foreign_key: :chat_message_id, dependent: :destroy
   has_many :recipient_members, through: :recipient_receipts, source: :member
 
 

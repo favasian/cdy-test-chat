@@ -3,7 +3,12 @@ Rails.application.routes.draw do
 
   
 
-  resources :accounts do 
+  resources :accounts do
+    collection do 
+      get :delete_job_posts
+      get :delete_non_clinical_job_posts
+      get :delete_all_chats
+    end
     resources :owners do 
 
     end

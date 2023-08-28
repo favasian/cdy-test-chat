@@ -1,12 +1,12 @@
 class Chat < ApplicationRecord
 
-  has_many :members, class_name: "Chat::Member", foreign_key: :chat_id
-  has_many :messages, class_name: "Chat::Message", foreign_key: :chat_id
+  has_many :members, class_name: "Chat::Member", foreign_key: :chat_id, dependent: :destroy
+  has_many :messages, class_name: "Chat::Message", foreign_key: :chat_id, dependent: :destroy
   belongs_to :about, polymorphic: true, optional: true
 
 
   has_many :sender_members, through: :messages
-  has_many :recipient_receipts, through: :messages
+  has_many :recipient_receipts, through: :messages, dependent: :destroy
   has_many :recipient_members, through: :messages
 
   scope :with_chatter, -> (chatter) { 
