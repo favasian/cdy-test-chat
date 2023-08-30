@@ -16,7 +16,7 @@ class Mailbox
   def send_proxy_message_to(receiver_chatter, sender_proxy, content, about)
     chat = chat_with_chatter(receiver_chatter)
     member = chat.member_for_chatter(@chatter)
-    chat.send_proxy_message(sender_proxy, member, nil, content, about)
+    chat.send_message(member, sender_proxy, content, about)
     chat
   end
 
