@@ -9,6 +9,7 @@ h4
 - if chatbox.about.present?
   h6 = "About #{chat.about.about_object.class.to_s.titleize}: #{chat.about.about_name}"
 div = chatbox.last_message_content
+div = chatbox.last_message_sender_name
 div = chatbox.last_message_sent_at
 - if chatbox.unread_count > 0
   div = "#{chatbox.unread_count} Unread"

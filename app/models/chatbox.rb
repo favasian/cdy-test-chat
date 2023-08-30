@@ -44,6 +44,19 @@ class Chatbox < Mailbox
     @chat.last_message_sent_at.strftime("%D %I:%M:%S %p")
   end
 
+  # This should maybe saved like last_message_content
+  def last_message
+    self.messages.last
+  end
+
+  def last_message_sender_name
+    if last_message.sender_proxy.present?
+      "Sent by #{last_message.sender_proxy.name}"
+    else
+      "Sent by #{last_message.sender_member.chatter.name}"
+    end
+  end
+
   def mark_all_messages_as_read!
     #current implementation is to mark as read for all people in the same group
     @chat.members.where(group: @member.group).each do |member|
@@ -59,4 +72,6 @@ class Chatbox < Mailbox
   def is_chatter?(chatter)
     @chat.member_for_chatter(chatter).present?
   end
+
+  
 end
