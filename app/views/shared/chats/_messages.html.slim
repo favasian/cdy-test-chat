@@ -7,6 +7,8 @@ hr
     div = message.created_at.strftime("%D %I:%M:%S %p")
     - if message.sender_proxy.present?
       div = "Sent by #{message.sender_proxy.name}"
+    - else
+      div = "Sent by #{message.sender_member.chatter.name}"
     = render 'message_edit_btn', chatbox: chatbox, message: message
 
   hr

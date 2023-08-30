@@ -16,7 +16,7 @@ class VendorUser::ChatsController < VendorUser::BaseController
   def send_message
     @chat = @current_vendor.chats.where(id: params[:id]).first
     chatbox = Chatbox.new(@chat, @current_vendor)
-    chatbox.send_message(message_params[:content], nil)
+    chatbox.send_proxy_message(@current_user, message_params[:content], nil)
     redirect_to vendor_user_chats_path(@current_vendor, @current_user, chat_id: @chat.id)
   end
 

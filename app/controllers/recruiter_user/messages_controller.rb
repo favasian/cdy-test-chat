@@ -8,7 +8,7 @@ class RecruiterUser::MessagesController < RecruiterUser::BaseController
       chatbox.send_proxy_message(@current_user, message_params[:content], nil)  
     else
       chatbox = Chatbox.new(chat, @job_post.owner)
-      chatbox.send_message(message_params[:content], nil)  
+      chatbox.send_proxy_message(@current_user, message_params[:content], nil)  
     end
     
     redirect_to user_job_post_path(@current_user, @job_post)

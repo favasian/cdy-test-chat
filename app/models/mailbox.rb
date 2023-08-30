@@ -12,6 +12,13 @@ class Mailbox
     chat.send_message(member, nil, content, about)
     chat
   end
+  
+  def send_proxy_message_to(receiver_chatter, sender_proxy, content, about)
+    chat = chat_with_chatter(receiver_chatter)
+    member = chat.member_for_chatter(@chatter)
+    chat.send_proxy_message(sender_proxy, member, nil, content, about)
+    chat
+  end
 
   def sent?(message)
     @chatter.id == message.sender_member.chatter_id && @chatter.class.base_class.name == message.sender_member.chatter_type

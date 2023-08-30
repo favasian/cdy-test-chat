@@ -2,7 +2,7 @@ class OwnerUser::MessagesController < OwnerUser::BaseController
 
   def create
     @chat = @current_owner.chats.where(id: params[:chat_id]).first
-    Chatbox.new(@chat, @current_owner).send_message(message_params[:content], nil)
+    Chatbox.new(@chat, @current_owner).send_proxy_message(@current_user, message_params[:content], nil)
     redirect_to owner_user_chats_path(@current_owner, @current_user, chat_id: @chat.id)
   end
 
